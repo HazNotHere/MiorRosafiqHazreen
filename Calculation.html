@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video Editing Pricing Calculator</title>
+    
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+	
+	<link rel="stylesheet" href="vendor.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#price-output {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body id="top">
+
+    <header id="masthead" class="s-header">
+        <div class="s-header__branding">
+            <p class="site-title">
+                <a href="index.html" rel="home">Service.</a>
+            </p>
+        </div>
+
+        <div class="row s-header__navigation">
+            <nav class="s-header__nav-wrap">
+                <h3 class="s-header__nav-heading">Navigate to</h3>
+                <ul class="s-header__nav">
+                        <li><a href="index.html" title="">Home</a></li>
+						<li><a href="myself.html">Myself</a></li>
+						<li><a href="gallery.html" title="" class="">Gallery</a></li>
+                        <li><a href="education.html" title="">Education</a></li>
+                        <li><a href="passion.html" title="">Passion</a></li>
+						<li class="current-menu-item"><a href="calculation.html">Video Editing Service</a></li>
+						<li><a href="contact.html" title="">Contact</a></li>
+                    </ul> <!-- end s-header__nav -->
+            </nav>
+        </div>
+
+        <a class="s-header__menu-toggle" href="#0"><span>Menu</span></a>
+        
+    </header>
+
+    <div id="content" class="s-content s-content--page">
+        <div class="row entry-wrap">
+            <div class="column lg-12">
+                <article class="entry">
+                    <header class="entry__header entry__header--narrow">
+                        <h1 class="entry__title">Video Editing Service</h1>
+                    </header>
+                    <div class="entry__media">
+                        <!-- You can add any media here if needed -->
+                    </div>
+                    <div class="content-primary">
+                        <div class="entry__content">
+                            <form id="pricingForm">
+                                <label for="videoDuration">Video Duration (in minutes):</label>
+                                <input type="number" id="videoDuration" name="videoDuration" min="1" required><br><br>
+                                <label for="additionalEffects">Additional Effects:</label>
+                                <select id="additionalEffects" name="additionalEffects">
+                                    <option value="0">None</option>
+                                    <option value="50">Basic Effects (+$50)</option>
+                                    <option value="100">Advanced Effects (+$100)</option>
+                                </select><br><br>
+                                <button type="button" onclick="calculatePrice()">Calculate Price</button>
+                            </form>
+                            <div id="totalPrice"></div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <footer id="colophon" class="s-footer">
+        
+        <div class="row s-footer__main">
+            <div class="column lg-5 md-6 tab-12">
+                <div class="row">
+                    <div class="column lg-6">
+                            <h4>Site Links</h4>
+								<ul class="link-list">
+                                <li><a href="index.html">Home</a></li>
+								<li><a href="myself.html">Myself</a></li>
+                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="education.html">Education</a></li>
+                                <li><a href="passion.html">Passion</a></li>
+								<li><a href="calculation.html">Video Editing Service</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="row s-footer__bottom">
+            <!-- You can add more footer content here -->
+        </div>
+        <div class="ss-go-top">
+            <a class="smoothscroll" title="Back to Top" href="#top">
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 10.25L12 4.75L6.75 10.25"/>
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19.25V5.75"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        function calculatePrice() {
+            const videoDuration = parseFloat(document.getElementById('videoDuration').value);
+            const additionalEffects = parseFloat(document.getElementById('additionalEffects').value);
+            const basePricePerMinute = 10;
+            let totalPrice = basePricePerMinute * videoDuration + additionalEffects;
+            document.getElementById('totalPrice').innerHTML = `Total Price: $${totalPrice.toFixed(2)}`;
+        }
+    </script>
+    <script src="plugins.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
